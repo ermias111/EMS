@@ -2,6 +2,7 @@ package com.exapmle.ems.controller;
 
 import com.exapmle.ems.domain.Employee;
 import com.exapmle.ems.repository.EmployeeRepository;
+import com.exapmle.ems.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -19,15 +20,15 @@ import java.util.Objects;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
 
     @GetMapping(path = "/top10Earning")
     public ResponseEntity<List<Employee>> top10EarningEmployeesPerDepartment(@Param("department") String department){
-        return new ResponseEntity<>(employeeRepository.top10EarningEmployeesByDepartment(department), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.top10EarningEmployeesByDepartment(department), HttpStatus.OK);
     }
 
     @GetMapping(path = "/maxEarnersInAllDepartments")
     public ResponseEntity<List<Map<String, Object>>> maxEarnersInEachDepartment(){
-        return new ResponseEntity<>(employeeRepository.maxEarnerFromEachDepartments(), HttpStatus.OK);
+        return new ResponseEntity<>(employeeService.maxEarnerFromEachDepartments(), HttpStatus.OK);
     }
 }
