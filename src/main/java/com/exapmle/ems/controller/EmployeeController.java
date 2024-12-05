@@ -21,13 +21,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @GetMapping(path = "/top10")
-    public ResponseEntity<List<Employee>> top10Employees(@Param("department") String department){
+    @GetMapping(path = "/top10Earning")
+    public ResponseEntity<List<Employee>> top10EarningEmployeesPerDepartment(@Param("department") String department){
         return new ResponseEntity<>(employeeRepository.top10EarningEmployeesByDepartment(department), HttpStatus.OK);
     }
 
-    @GetMapping(path = "/maxEarner")
-    public ResponseEntity<List<Map<String, Object>>> maxEarner(){
+    @GetMapping(path = "/maxEarnersInAllDepartments")
+    public ResponseEntity<List<Map<String, Object>>> maxEarnersInEachDepartment(){
         return new ResponseEntity<>(employeeRepository.maxEarnerFromEachDepartments(), HttpStatus.OK);
     }
 }
